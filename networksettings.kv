@@ -1,0 +1,66 @@
+<NetworkSettingsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 8
+            Label:
+                size_hint_y: 4
+                text: "Network Settings"
+            BoxLayout:
+                size_hint_y: 1
+                orientation: "horizontal"
+                Label:
+                    text: "Server IP:"
+                TextInput:
+                    text: "127.0.0.1"
+            BoxLayout:
+                size_hint_y: 1
+                orientation: "horizontal"
+                Label:
+                    text: "Server PORT:"
+                TextInput:
+                    text: "9999"
+            BoxLayout:
+                size_hint_y:1
+                orientation: "horizontal"
+                Label:
+                    text: "Station ID:"
+                TextInput:
+                    text: "1"
+            BoxLayout:
+                size_hint_y:4
+                orientation: "vertical"
+                Label:
+                    size_hint_y:1
+                BoxLayout:
+                    size_hint_y: 2
+                    orientation: "horizontal"
+                    Button:
+                        text: "SAVE"
+                    Button:
+                        text: "Cancel"
+                Label:
+                    size_hint_y:1
+
+        BoxLayout:
+            size_hint_y: 2
+            orientation: "horizontal"
+            Button:
+                id: button_network_settings
+                text: "Network Settings"
+                disabled: True
+
+            Button:
+                id: button_game_settings
+                text: "Game Settings"
+                on_release:
+                    root.manager.transition.direction="left"
+                    root.manager.current = 'gamesettings'
+            Button:
+                id: button_game_on
+                text: "Game On"
+                on_release:
+                    root.manager.transition.direction="left"
+                    root.manager.current = 'gameon'

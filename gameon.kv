@@ -1,0 +1,108 @@
+<GameOnScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            Label:
+        BoxLayout:
+
+            orientation: "horizontal"
+            size_hint_y: 4
+            BoxLayout:
+                orientation: "vertical"
+                BoxLayout:
+                    size_hint_y:5
+                    orientation: "horizontal"
+                    Label:
+                        #size_hint_y:5
+                        id: game_screen_label1
+                        text: "Game Screen"
+                    BoxLayout:
+                        orientation: "vertical"
+                        Label:
+                            id: won_legs_1
+                            #text: "Nyert Leg-ek száma:"
+                        Label:
+                            id: won_sets_1
+                            #text: "Nyert Set-ek száma:"
+                TextInput:
+                    size_hint_y:7
+                    id: score_1
+                    #text: "0"
+                    #background_color: 1,0,1,1
+                    font_size: '60sp'
+                    valign: "center"
+                    #padding: [50,50]
+                    #width: '100dp'
+                    disabled: False
+            BoxLayout:
+                orientation: "vertical"
+                BoxLayout:
+                    size_hint_y:5
+                    orientation: "horizontal"
+                    Label:
+                        #size_hint_y:5
+                        id: game_screen_label2
+                        text: "Game Screen"
+                    BoxLayout:
+                        orientation: "vertical"
+                        Label:
+                            id: won_legs_2
+                            #text: "Nyert Leg-ek száma:"
+                        Label:
+                            id: won_sets_2
+                            #text: "Nyert Set-ek száma:"
+                TextInput:
+                    size_hint_y:7
+                    id: score_2
+                    #text: "0"
+                    font_size: '60sp'
+                    #width: '200dp'
+                    disabled: True
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y:4
+            TextInput:
+                id: player1_scores
+                size_hint_x:2
+                disabled: True
+            TextInput:
+                id: actual_score
+                size_hint_x:4
+            TextInput:
+                id: player2_scores
+                size_hint_x:2
+                disabled: True
+        BoxLayout:
+            size_hint_y: 6
+            GridLayout:
+                id: grid_numerics
+                cols: 3
+                rows: 4
+
+        BoxLayout:
+            size_hint_y: 2
+            orientation: "horizontal"
+            Button:
+                id: button_exit_game
+                text: "Cancel"
+
+                on_release:
+                    root.cancel_game()
+                    root.manager.transition.direction="right"
+                    root.manager.current = 'gamesettings'
+                #    print(root.manager.current_screen)
+                disabled: True
+            Button:
+                id: button_game_settings
+                text: "Game Settings"
+                #text: root.manager.get_screen(gamesettings).player1_name.defaultvalue
+                on_release:
+                    root.manager.transition.direction="right"
+                    root.manager.current = 'gamesettings'
+
+            Button:
+                id: button_game_on
+                text: "Start Game"
+                #disabled: True
+                #on_release: score_1.text = str(int(score_1.text) + 1)
+                on_release: root.start_game()
