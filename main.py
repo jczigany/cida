@@ -10,7 +10,7 @@ from kivy.properties import ObjectProperty, NumericProperty, StringProperty
 from gamesettings import Gamex01SettingsScreen
 from networksettins import NetworkSettingsScreen
 from gameon import GameOnScreen
-from dbtool import adatbazis
+from dbtool import adatbazis, create_tables
 from kivy.config import Config
 
 
@@ -26,13 +26,14 @@ class CiDaApp(App):
     def build(self):
         #Config.set('kivy', 'keyboard_mode', 'systemandmulti')
         #kurzor = adatbazis()
+        create_tables()
         self.szoveg = "valami"
         #Screen-Objektumok létrehozása
         self.gamesettingsScreen = Gamex01SettingsScreen(name='gamesettings')
         self.networksettingsScreen = NetworkSettingsScreen(name='networksettings')
         self.gameonScreen = GameOnScreen(name='gameon')
 
-        # ScreenManager létrehozása
+        # ScreenManager létrehozásajjj
         self.sm = sm = ScreenManager()
 
         #Screen-ek hozzáadása a managerhez
