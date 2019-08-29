@@ -11,6 +11,13 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from dbtool import adatbazis
 import random, os, sqlite3
+import socket
+from ast import literal_eval
+
+
+HOST, PORT = ['127.0.0.1', 65432]
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
 
 class Gamex01SettingsScreen(Screen):
     def __init__(self, **kwargs):
@@ -181,24 +188,27 @@ class Gamex01SettingsScreen(Screen):
 
     def on_pre_enter(self, *args):
         #print("Game Settings!!!")
-        screen_nev = App.get_running_app().sm.current_screen
+        #screen_nev = App.get_running_app().sm.current_screen
         #print(str(screen_nev)[14:-2])
         #self.ids.button_game_settings.background_color = [0, 1, 1, 1]
         self.gomb_gamesettings.background_color = [0, 1, 1, 1]
         self.gomb_gamesettings.disabled = True
 
         temptext = ''
-        dbfile = 'adatbazis.db'
-        db_exist = os.path.exists(dbfile)
-        if db_exist:
-            self.conn = sqlite3.connect(dbfile)
-            self.kurzor = self.conn.cursor()
-        self.kurzor.execute("select * from players")
-        sor2 = self.kurzor.fetchall()
+
+        s.send("SELECT * from players".encode("utf-8"))
+        data = s.recv(1024)
+        sor2 = literal_eval(data.decode("utf-8"))
+        ###dbfile = 'adatbazis.db'
+        ###db_exist = os.path.exists(dbfile)
+        ###if db_exist:
+            ###self.conn = sqlite3.connect(dbfile)
+            ###self.kurzor = self.conn.cursor()
+        ###self.kurzor.execute("select * from players")
+        ###sor2 = self.kurzor.fetchall()
         for sor in sor2:
             temptext += sor[1] + "-"
         self.player_hint = temptext.split('-')
-        #print(self.player_hint)
 
     def on_text1(self, instance, value):
         self.suggestion_text = ''
