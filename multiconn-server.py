@@ -33,9 +33,7 @@ def service_connection(key, mask):
         recv_data = sock.recv(100)  # Should be ready to read
         if recv_data:
             kapott += recv_data.decode("utf-8")
-            #print(kapott)
             parancs = kapott[:6]
-            #print(parancs)
             if parancs.upper() in ["INSERT", "UPDATE", "DELETE", "SELECT"]:
                 cursor.execute(kapott)
                 if parancs == "SELECT":
